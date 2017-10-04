@@ -1,0 +1,30 @@
+﻿<div class="col s3 valign-wrapper" style="height:inherit;width:inherit;background-color:inherit;text-align:center;position:absolute;top:70px" ">
+    <div class="card" style="height:450px;top:0px;position:inherit;width:210px">
+        <div class="card-content">
+            <h3 class="card-title grey-text text-darken-2" style="font-weight:bolder">Patient Info</h3>
+            <form action="{{ url_for('show_home') }}" method="post">
+                <br />
+                <div id="age">
+                    <label for="txtage" data-error="Enter a valid age" data-success="Great,Now Select a gender"></label>
+                    <label for="txtage" class="grey-text text-darken-2" style="font-size:large;font-weight:bolder;">Age</label>
+                    <input name="txtage" class="validate typehead-input grey-text text-darken-2" style="font-size:large;font-weight:bolder;" type="number" min="0" max="130" />
+
+                </div>
+
+                <div id="gender">
+                    <label class="grey-text text-darken-2" style="font-size:large;font-weight:bolder;">Gender</label>
+                    <br />
+                    <input class="grey-text text-darken-2" style="font-size:large;font-weight:bolder;" name="rbgender" id="g1" type="radio" value="male" />
+                    <label class="grey-text text-darken-2" for="g1">Male</label>
+                    <input class="grey-text text-darken-2" style="font-size:large;font-weight:bolder;" name="rbgender" id="g2" type="radio" value="female" />
+                    <label class="grey-text text-darken-2" for="g2">Female</label>
+                </div>
+                <div class="card-action">
+                    <input type="submit" class="btn" value="Proceed" style="position:relative;bottom:10px;left:5px;">
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,299 @@
+﻿{% extends "main-typeahead.html" %}
+{% block content %}
+{% include "header.html" %}
+
+<style type="text/css">
+    .tt-input, /* UPDATE: newer versions use tt-input instead of tt-query */
+    .tt-hint {
+        width: 396px;
+        height: 30px;
+        padding: 8px 12px;
+        font-size: 24px;
+        line-height: 30px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+        font-size: large;
+        font-weight: bolder;
+        color:teal
+    }
+
+    .tt-input { /* UPDATE: newer versions use tt-input instead of tt-query */
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    }
+
+    .tt-hint {
+        color: #999;
+    }
+
+    .tt-menu { /* UPDATE: newer versions use tt-menu instead of tt-dropdown-menu */
+        width: 422px;
+        margin-top: 12px;
+        padding: 8px 0;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    }
+
+    .tt-suggestion {
+        padding: 3px 20px;
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+        .tt-suggestion p {
+            margin: 0;
+        }
+
+        .tt-suggestion > p:hover,
+        .tt-suggestion > p:focus {
+            color: #ffffff;
+            text-decoration: none;
+            outline: 0;
+            background-color: #428bca;
+        }
+
+        .tt-suggestion.tt-cursor { /* UPDATE: newer versions use .tt-suggestion.tt-cursor */
+            color: #fff;
+            background-color: #428bca;
+        }
+
+        .tt-suggestion.tt-cursor,
+        .tt-suggestion:hover {
+            color: #fff;
+            background-color: #428bca;
+            cursor: pointer;
+        }
+
+    /*  http://jsfiddle.net/sherbrow/khsss/1/ */
+    .typeahead + .dropdown-menu .active > a,
+    .typeahead + .dropdown-menu .active > a:hover {
+        color: #ffffff;
+        background-color: #FF77FF;
+        background-image: -moz-linear-gradient(top, #FF77FF, #FF44FF);
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FF77FF), to(#FF44FF));
+        background-image: -webkit-linear-gradient(top, #FF77FF, #FF44FF);
+        background-image: -o-linear-gradient(top, #FF77FF, #FF44FF);
+        background-image: linear-gradient(to bottom, #FF77FF, #FF44FF);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF77FF', endColorstr='#FF44FF', GradientType=0);
+    }
+
+    #multiple-datasets .league-name {
+        margin: 0 20px 5px 20px;
+        padding: 3px 0;
+        border-bottom: 1px solid #ccc;
+    }
+    .card-1 {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    }
+
+        .card-1:hover {
+            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        }
+
+    .card-2 {
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
+    .card-3 {
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    }
+
+    .card-4 {
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+
+   
+</style>
+<style>
+    .card1 {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 100%;
+        border-radius: 5px;
+    }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+
+    img {
+        border-radius: 5px 5px 0 0;
+    }
+
+    .container {
+        padding: 2px 16px;
+    }
+</style>
+
+<main>
+
+    <section>
+        <div class="row" style="background-color:white; width:100%;height:100%;position:fixed;top:15px;left:15px">
+            {% if auth_status == false %}
+                <!--Show Basic Info Form-->
+                    
+                    {% include "basic_info.html" %}
+                
+                <!--Show Pre loader legends-->
+                    
+                    {% include "pre_loader_basic_info.html" %}
+            {% else %}
+            
+                <!--Show Entered user details-->
+                
+                    {% include "entered_user_info.html" %}
+                    
+                    {% if info_collected == true %}
+
+                            <!--Show Question section-->
+                            {% include "question_section.html" %}
+                            <!--Show Diagnosis section-->
+                            {% include "diagnosis_section.html" %}
+
+                    {% else %}
+
+                            <!--Show Symtom form-->
+                            {% include "symptom_form.html" %}
+                    {% endif %}
+            {% endif %}
+            
+                      
+        </div>
+    </section>
+</main>
+
+<script type="text/javascript">
+    $('body').on("mouseover", ".tt-suggestion", function () {
+        $('.tt-suggestion').removeClass('tt-cursor');
+        $(this).addClass('tt-cursor');
+    });
+</script>
+
+
+<!-- Example 2 -->
+<script>
+    var resources = new Bloodhound({
+        datumTokenizer: function (datum) {
+            return Bloodhound.tokenizers.whitespace(datum.label)
+        },
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        //prefetch: 'http://twitter.github.io/typeahead.js/data/films/post_1960.json',
+        prefetch: {
+            url: '{{ url_for("search_symptoms") }}',
+            'cache': false,
+            filter: function (response) {
+                console.log("Data: ", response.resource_list)
+                return response.resource_list;
+            }
+        }
+    });
+
+    // datumTokenizer: Bloodhound.tokenizers.whitespace,
+    // queryTokenizer: Bloodhound.tokenizers.whitespace,
+    // `states` is an array of state names defined in "The Basics"
+    // local: ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
+    // 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
+    // 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
+    // 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+    // 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+    // 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+    // 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
+    // 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+    // 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+    // ]
+    //prefetch: 'https://github.com/twitter/typeahead.js/blob/gh-pages/data/countries.json'
+
+
+    // bestPictures.add([{
+    //     "year": "1964",
+    //     "value": "My awesome life!",
+    //     "tokens": [
+    //       "My",
+    //       "Awesome",
+    //       "Life"]
+    //     }]);
+
+    //resources.add([{"value": "MIR:00000777", "label": "My Added Resource"}]);
+
+    resources.initialize();
+
+    // $('#bloodhound .typeahead').typeahead({
+    //   hint: true,
+    //   highlight: true,
+    //   minLength: 1
+    // },
+    // {
+    //   name: 'resources',
+    //   display: function(response) {
+    //     return response.label;
+    //   },
+    //   source: resources.ttAdapter()
+    // });
+
+    //$('#bloodhound .typeahead').typeahead({
+    $('#bloodhound .typehead-input').materialtags({
+        maxTags: 6,
+        onTagExists: function (item, $tag) {
+            $tag.hide().fadeIn();
+        },
+        // hint: true,
+        // highlight: true,
+        // minLength: 1,
+        typeaheadjs: {
+            name: 'resources',
+            displayKey: 'label',
+            valueKey: 'value',
+            source: resources.ttAdapter()
+        },
+        //freeInput: true
+    });
+
+//Use TypeaheadJS for Autocomplete
+// var substringMatcher = function(strs) {
+//   return function findMatches(q, cb) {
+//     var matches, substringRegex;
+
+//     // an array that will be populated with substring matches
+//     matches = [];
+
+//     // regex used to determine if a string contains the substring `q`
+//     substrRegex = new RegExp(q, 'i');
+
+//     // iterate through the pool of strings and for any string that
+//     // contains the substring `q`, add it to the `matches` array
+//     $.each(strs, function(i, str) {
+//       if (substrRegex.test(str)) {
+//         matches.push(str);
+//       }
+//     });
+
+//     cb(matches);
+//   };
+// };
+
+// var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
+//   'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
+//   'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
+//   'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+//   'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+//   'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+//   'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
+//   'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+//   'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+// ];
+
+// $('#the-basics .typeahead').typeahead({
+//   hint: true,
+//   highlight: true,
+//   minLength: 1
+// },
+// {
+//   name: 'states',
+//   source: substringMatcher(states)
+// });
+</script>
+{% endblock %}

@@ -1,0 +1,25 @@
+{
+  "type": "single",
+  "text": "Are you experiencing any chest pain?",
+  "item": [
+    {
+      "id": "s_50",
+      "name": "Chest pain",
+      "choices": [
+        {
+          "id": "present",
+          "label": "Yes"
+        },
+        {
+          "id": "absent",
+          "label": "No"
+        },
+        {
+          "id": "unknown",
+          "label": "Don't know"
+        }
+      ]
+    }
+  ],
+  "extras": { "image_url": "http://static.doktor-medi.pl/images/bol-w-klatce.png" }
+}

@@ -1,0 +1,127 @@
+﻿
+   {% if has_conditions == true%}
+    <div class="col s2 push-s9 valign-wrapper darken-4" style="height:inherit;width:inherit;text-align:left;background-color:ghostwhite;position:absolute;top:10px;overflow:auto;">
+
+        <ul>
+            {% if cond1 != ""%}
+            <li>
+                <div class="card white darken-4">
+                    <div class="container">
+
+                        <h6> <span class="cyan-text text-darken-4" style="font-weight:bold;"> {{cond1.common_name}} </span></h6>
+
+                        <h10><span class="cyan-text text-darken-4" style="font-weight:bold;">Possibility : </span><span style="font-weight:bold;color:indianred">{{cond1.perc}} %</span></h10><br />
+                        {% if cond1.severity == "severe" %}
+                        <h10><span class="cyan-text text-darken-4" style="font-weight:bold;">Severity : </span><span style="font-weight:bold;color:indianred">Severe</span></h10><br />
+                        {% endif %}
+                        {% if cond1.severity == "mild" %}
+                        <h10><span class="cyan-text text-darken-4" style="font-weight:bold;">Severity : </span><span style="font-weight:bold;color:mediumseagreen">Mild</span></h10><br />
+
+                        {% endif %}
+                        {% if cond1.severity == "moderate" %}
+                        <h10><span class="cyan-text text-darken-4" style="font-weight:bold;">Severity : </span><span style="font-weight:bold;color:yellowgreen">Moderate</span></h10><br />
+
+                        {% endif %}
+
+                        <h10><span class="cyan-text text-darken-4" style="font-weight:bold;">Prevalance : </span><span style="font-weight:bold;color:black">{{cond1.prevalence}}</span></h10><br />
+
+                        {% if cond1.triage_level == "self_care" %}
+                        <h10><span class="cyan-text text-darken-4" style="font-weight:bold;">Triage Level : </span><span style="font-weight:bold;color:mediumseagreen">Self Care</span></h10><br />
+                        {% endif %}
+                        {% if cond1.triage_level == "consultation" %}
+                        <h10><span class="cyan-text text-darken-4" style="font-weight:bold;">Triage Level : </span><span style="font-weight:bold;color:yellowgreen">Consultation</span></h10><br />
+                        {% endif %}
+                        {% if cond1.triage_level == "emergency" %}
+                        <h10><span class="cyan-text text-darken-4" style="font-weight:bold;">Triage Level : </span><span style="font-weight:bold;color:indianred">Emergency</span></h10><br />
+                        {% endif %}
+                    </div>
+                    <div style="text-align:center;">
+                        <input type="button" style="font-size:small;font-weight:bold;" value="Send Report" class="btn blue grey-text text-darken-4" />
+                        <input type="button" style="font-size:small;font-weight:bold;" value="View Advice" class="btn blue grey-text text-darken-4" />
+                    </div>
+                    <h9> <span class="yellow-text text-darken-4" style="font-weight:bold;word-wrap: break-word;">{{cond1.extras.hint}}</span></h9>
+
+                </div>
+
+            </li>
+            {% endif %}
+            <li></li>
+            {% if cond2 !="" %}
+            <li>
+                <div class="card white darken-4" style="width:300px">
+                    <div class="container">
+
+                        <h6> <span class="cyan-text text-darken-4" style="font-weight:bold;"> {{cond2.common_name}} </span></h6>
+
+                        <h10><span class="cyan-text text-darken-4" style="font-weight:bold;">Possibility : </span><span style="font-weight:bold;color:indianred">{{cond2.perc}} %</span></h10><br />
+                        {% if cond2.severity == "severe" %}
+                        <h10><span class="cyan-text text-darken-4" style="font-weight:bold;">Severity : </span><span style="font-weight:bold;color:indianred">Severe</span></h10><br />
+                        {% endif %}
+                        {% if cond2.severity == "mild" %}
+                        <h10><span class="cyan-text text-darken-4" style="font-weight:bold;">Severity : </span><span style="font-weight:bold;color:mediumseagreen">Mild</span></h10><br />
+
+                        {% endif %}
+                        {% if cond2.severity == "moderate" %}
+                        <h10><span class="cyan-text text-darken-4" style="font-weight:bold;">Severity : </span><span style="font-weight:bold;color:yellowgreen">Moderate</span></h10><br />
+
+                        {% endif %}
+
+                        <h10><span class="cyan-text text-darken-4" style="font-weight:bold;">Prevalance : </span><span style="font-weight:bold;color:black">{{cond2.prevalence}}</span></h10><br />
+
+                        {% if cond2.triage_level == "self_care" %}
+                        <h10><span class="cyan-text text-darken-4" style="font-weight:bold;">Triage Level : </span><span style="font-weight:bold;color:mediumseagreen">Self Care</span></h10><br />
+                        {% endif %}
+                        {% if cond2.triage_level == "consultation" %}
+                        <h10><span class="cyan-text text-darken-4" style="font-weight:bold;">Triage Level : </span><span style="font-weight:bold;color:yellowgreen">Consultation</span></h10><br />
+                        {% endif %}
+                        {% if cond2.triage_level == "emergency" %}
+                        <h10><span class="cyan-text text-darken-4" style="font-weight:bold;">Triage Level : </span><span style="font-weight:bold;color:indianred">Emergency</span></h10><br />
+                        {% endif %}
+                    </div>
+                    <div style="text-align:center;">
+                        <input type="button" style="font-size:small;font-weight:bold;" value="Send Report" class="btn blue grey-text text-darken-4" />
+                        <input type="button" style="font-size:small;font-weight:bold;" value="View Advice" class="btn blue grey-text text-darken-4" />
+                    </div>
+                    <div >
+                        <h9> <span class="yellow-text text-darken-4" style="font-weight:bold;word-wrap: break-word;">{{cond2.extras.hint}}</span></h9>
+                    </div>
+                </div>
+
+            </li>
+           
+            {% endif %}
+
+        </ul>
+    </div>
+
+        {% else %}
+        <div class="col s2 push-s9 valign-wrapper darken-4" style="height:inherit;width:inherit;word-wrap:break-word;background-color:ghostwhite;position:absolute;top:10px;overflow:auto;">
+
+
+            <div style="text-align:left;">
+                <h6> <span class="red-text text-darken-4" style="font-weight:bold;word-wrap: break-word;">No possible conditions found for <br /> symptoms entered</span></h6>
+                <h6> <span class="blue-text text-darken-4" style="font-weight:bold;">Refine results by answering few questions</span></h6>
+
+            </div>
+        </div>
+            {% endif %}
+
+
+
+
+
+            <!--<div class="card cyan darken-3 offset-m2 l6 offset-l6" style="height:450px;width:300px;top:0px;position:inherit;overflow:auto;">
+
+            <h5 class="cyan-text text-darken-4" style="font-weight:bold;">Possible Conditions</h5>
+            <div  class="card teal darken-3" sstyle="height:80%;width:80%;" >
+
+                <h6> <span style="font-weight:bold;color:antiquewhite"> Condition 1 </span></h6>
+                <h9><span style="font-weight:bold;color:antiquewhite" >Possibility : </span><span style="font-weight:bold;color:darkblue">60%</span></h9><br/>
+                <h9><span style="font-weight:bold;color:antiquewhite">Severity : </span><span style="font-weight:bold;color:darkblue">Severe</span></h9><br />
+                <h9><span style="font-weight:bold;color:antiquewhite">Prevalance : </span><span style="font-weight:bold;color:darkblue">Rare</span></h9><br />
+                <h9><span style="font-weight:bold;color:antiquewhite">Advice : </span><span style="font-weight:bold;color:darkblue">I Reccomend you to</span></h9><br />
+                <h9><span style="font-weight:bold;color:antiquewhite">Triage Level : </span><span style="font-weight:bold;color:darkblue">Consultation</span></h9><br />
+            </div>
+
+        </div>-->
+        

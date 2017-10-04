@@ -1,0 +1,26 @@
+﻿<div class="col s2 push-s2 valign-wrapper" style="height:inherit;width:inherit;background-color:inherit;text-align:center;position:absolute;top:70px">
+    <div class="card offset-m2 l6 offset-l6" style="height:450px;width:500px;top:0px;position:inherit;">
+        <div class="card-content">
+            <h3 class="card-title grey-text text-darken-2" style="font-weight:bolder">Enter Symptoms</h3>
+            <br />
+            <form action="{{ url_for('results') }}" method="post">
+
+                <!--<h2>{{age}} years old,{{gender}}</h2>-->
+
+                <div id="bloodhound">
+                    <input name="age" type="hidden" value="{{age}}" />
+                    <input name="gender" type="hidden" value="{{gender}}" />
+                    <label for="txtsymptoms" class="grey-text text-darken-2" style="font-size:large;font-weight:bolder;">Symptoms</label>
+                    <!--<input class="typehead-input" type="text" data-role="materialtags"  placeholder="Select symptoms" name="txtsymptoms" />-->
+                    <input name="txtsymptoms" class="typehead-input grey-text text-darken-2" style="font-size:large;font-weight:bolder;" type="text" />
+
+                </div>
+                <div class="card-action offset-m2">
+                    <input type="submit" class="btn" value="Next" style="position:fixed;bottom:60px;left:430px;">
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>

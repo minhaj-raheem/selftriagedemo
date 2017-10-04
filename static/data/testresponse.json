@@ -1,0 +1,126 @@
+{
+  "conditions": [
+    {
+      "common_name": "Ischemic heart disease",
+      "id": "c_18",
+      "name": "Ischemic heart disease",
+      "probability": 0.432
+    }
+  ],
+  "evaluation_time": null,
+  "extras": {},
+  "extras_permanent": {},
+  "interview_id": null,
+  "lab_tests": [],
+  "patient_age": "22",
+  "patient_sex": "male",
+  "pursued": [],
+  "question": {
+    "extras": {},
+    "items": [
+      {
+        "choices": [
+          {
+            "id": "present",
+            "label": "Yes"
+          },
+          {
+            "id": "absent",
+            "label": "No"
+          },
+          {
+            "id": "unknown",
+            "label": "Don't know"
+          }
+        ],
+        "id": "s_1197",
+        "name": "Severe"
+      },
+      {
+        "choices": [
+          {
+            "id": "present",
+            "label": "Yes"
+          },
+          {
+            "id": "absent",
+            "label": "No"
+          },
+          {
+            "id": "unknown",
+            "label": "Don't know"
+          }
+        ],
+        "id": "s_1601",
+        "name": "Stabbing or piercing"
+      },
+      {
+        "choices": [
+          {
+            "id": "present",
+            "label": "Yes"
+          },
+          {
+            "id": "absent",
+            "label": "No"
+          },
+          {
+            "id": "unknown",
+            "label": "Don't know"
+          }
+        ],
+        "id": "s_51",
+        "name": "Diffuse, spreads around my chest"
+      },
+      {
+        "choices": [
+          {
+            "id": "present",
+            "label": "Yes"
+          },
+          {
+            "id": "absent",
+            "label": "No"
+          },
+          {
+            "id": "unknown",
+            "label": "Don't know"
+          }
+        ],
+        "id": "s_1509",
+        "name": "Located below the breastbone"
+      },
+      {
+        "choices": [
+          {
+            "id": "present",
+            "label": "Yes"
+          },
+          {
+            "id": "absent",
+            "label": "No"
+          },
+          {
+            "id": "unknown",
+            "label": "Don't know"
+          }
+        ],
+        "id": "s_37",
+        "name": "Radiates between my shoulder blades"
+      }
+    ],
+    "text": "How would you describe your chest pain?",
+    "type": "group_multiple"
+  },
+  "risk_factors": [],
+  "symptoms": [
+    {
+      "choice_id": "present",
+      "id": "s_45"
+    },
+    {
+      "choice_id": "present",
+      "id": "p_9"
+    }
+  ]
+}

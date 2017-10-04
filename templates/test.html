@@ -1,0 +1,5 @@
+﻿<div class="valign-wrapper" style="width:100%;height:100%;position: absolute;">
+    <div class="valign" style="width:100%;">
+    <div class="container"><div class="row"><div><div class="card teal lighten-3">
+        <div class="card-content teal-text text-darken-4"><span class="card-title">Check in detail</span>
+        <form action="{{ url_for('qsubmit') }}" method="post"><h5>Has your headache started suddenly?</h5><input class="teal-text text-darken-4" name="rb1" id="rb_1" type="checkbox" value="present" /><label class="teal-text text-darken-4" for="rb_1">Yes</label><br /><input class="teal-text text-darken-4" name="rb1" id="rb_2" type="checkbox" value="absent" /><label class="teal-text text-darken-4" for="rb_2">No</label><br /><input class="teal-text text-darken-4" name="rb1" id="rb_3" type="checkbox" value="unknown" /><label class="teal-text text-darken-4" for="rb_3">Don't know</label><br /><input type="hidden" name="questiontype" value="group_multiple"><input type="hidden" name="optioncount" value="4"><div class="card-action"><input type="submit" class="btn" value="Finish"></div></form></div></div></div></div></div></div></div>
